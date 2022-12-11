@@ -1,0 +1,104 @@
+<div class="min-h-screen flex flex-column">
+    <div class="bg-indigo-500 py-3 px-5 flex align-items-center justify-content-between relative lg:static" style="min-height: 80px">
+        <div class="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full bg-indigo-500 left-0 top-100 z-1 shadow-2 lg:shadow-none">
+            <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row">
+                <li>
+                    <a pRipple class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 font-medium border-round cursor-pointer transition-colors transition-duration-150" pStyleClass="@next" enterClass="hidden" enterActiveClass="scalein"
+                        leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
+                        <span>Operation</span>
+                        <i class="pi pi-angle-down ml-auto lg:ml-3"></i>
+                    </a>
+                    <ul class="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:border-1 border-50 lg:shadow-2 lg:absolute surface-overlay hidden origin-top w-full lg:w-15rem cursor-pointer">
+                        <li>
+                            <a (click)="add()" pRipple class="flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                                <i class="pi pi-user-plus mr-2"></i>
+                                <span class="font-medium">Add New</span>
+                            </a>
+                            <a (click)="searchfriedns()" pRipple class="flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                                <i class="pi pi-user-plus mr-2"></i>
+                                <span class="font-medium">Add friends</span>
+                            </a>
+                            <a (click)="showfriends()" pRipple class="flex p-3 align-items-center text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150">
+                                <i class="pi pi-user-plus mr-2"></i>
+                                <span class="font-medium">show friends</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row border-top-1 border-indigo-400 lg:border-top-none">
+                <li class="flex-order-2 lg:flex-order-0">
+                    <div class="flex px-6 p-3 lg:px-3 lg:py-2">
+                        <span class="p-input-icon-left w-full">
+                            <i class="pi pi-search"></i>
+                            <input type="text" pInputText placeholder="Search" class="w-full" />
+                        </span>
+                    </div>
+                </li>
+                <li class="border-top-1 border-indigo-400 lg:border-top-none">
+                    <button [routerLink]="['/login']" pButton pRipple type="button" label="Logout" class="p-button-rounded p-button-success"></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="p-5 flex flex-column flex-auto">
+        <p-listbox [options]="friendlist" [(ngModel)]="selectedCountries" [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'500px'}" [style]="{'width':'15rem','margin-left':'85%'}">
+            <ng-template let-country pTemplate="item">
+                <div class="country-item">
+                    <img style="height:50px;" src="https://storgeyangzhengx.blob.core.windows.net{{country.filePath}}" />
+                    <div>friendsname:{{country.friendsname}}</div>
+                </div>
+                <p-button (click)="deletefriends(country.id) " label="Delete " styleClass="p-button-link "></p-button>
+
+            </ng-template>
+        </p-listbox>
+        <div *ngIf="admin; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <div class="grid" *ngFor="let resykt of videolistadmin">
+                <div class="col-12 lg:col-10" style="float:left">
+                    <div class="surface-card border-round shadow-2 p-4 text-center">
+                        <div class="text-900 font-medium mb-3 text-xl">{{resykt.userName}}</div>
+                        <div *ngIf="resykt.isvideo == 'true';then videos else picutres"></div>
+                        <ng-template #videos>
+                            <video width="320" height="240" controls>
+                                <source src="https://storgeyangzhengx.blob.core.windows.net{{resykt.filePath}}">
+                              </video>
+                        </ng-template>
+                        <ng-template #picutres>
+                            <img style="height:200px;" src="https://storgeyangzhengx.blob.core.windows.net{{resykt.filePath}}">
+                        </ng-template>
+
+
+                        <br>
+                        <button (click)="goPage(resykt.fileName)" pButton pRipple label="More" icon="pi pi-arrow-right p-button-rounded"></button>
+                    </div>
+
+
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #elseBlock>
+            <div class="grid" *ngFor="let resykt of videolist">
+                <div class="col-12 lg:col-10" style="float:left">
+                    <div class="surface-card border-round shadow-2 p-4 text-center">
+                        <div class="text-900 font-medium mb-3 text-xl">{{resykt[0].userName}}</div>
+                        <div *ngIf="resykt.isvideo == 'true';then videos else picutres"></div>
+                        <ng-template #videos>
+                            <video width="320" height="240" controls>
+                                <source src="https://storgeyangzhengx.blob.core.windows.net{{resykt[0].filePath}}">
+                              </video>
+                        </ng-template>
+                        <ng-template #picutres>
+                            <img style="height:200px;" src="https://storgeyangzhengx.blob.core.windows.net{{resykt[0].filePath}}">
+                        </ng-template>
+                        <br>
+                        <button (click)="goPage(resykt[0].fileName)" pButton pRipple label="More" icon="pi pi-arrow-right p-button-rounded"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </div>
+
+</div>

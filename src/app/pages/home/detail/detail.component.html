@@ -1,0 +1,106 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<div class="p-5" style="margin-top: 10vh">
+    <div class="grid">
+        <div class="col-12 xl:col-10">
+            <div class="surface-card shadow-2 border-round p-4">
+                <div class="text-xl text-900 font-medium mb-5">userName {{video.userName}}
+                </div>
+                <ul class="list-none p-0 m-0">
+                    <li class="pb-3 border-bottom-1 surface-border">
+                        <div *ngIf="filetypes;then videos else picutres"> </div>
+                        <ng-template #videos>
+                            <video width="320" height="240" controls>
+                              <source src="https://storgeyangzhengx.blob.core.windows.net{{video.filePath}}">
+                            </video>
+                        </ng-template>
+                        <ng-template #picutres>
+                            <img style="height:200px;" src="https://storgeyangzhengx.blob.core.windows.net{{video.filePath}}">
+                        </ng-template>
+
+                        <div class="line-height-3 text-600" style="max-width: 30rem">
+                            detail:{{video.detail}}</div>
+                    </li>
+                </ul>
+                <div class="flex justify-content-between pt-3">
+                    <button (click)="deleteFood()" pButton pRipple label="Delete" class="p-button-outlined p-button-secondary w-6 mr-2"></button>
+                    <div *ngIf="admin; then thenBlock"></div>
+                    <ng-template #thenBlock>
+
+                        <button (click)="open()" pButton pRipple label="Edit" class="p-button-outlined w-6 ml-2"></button>
+                    </ng-template>
+                    <button pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-help p-button-text" (click)="like()"></button>
+                </div>
+                <div class="flex justify-content-between pt-3">
+                    <ul class="list-none p-0 m-0 " *ngFor="let item of likestring ">
+                        <button pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-help p-button-text" (click)="like()">{{item.userName}}</button>
+                    </ul>
+                </div>
+                <br>
+                <br>
+                <textarea [rows]="5" [cols]="150" pInputTextarea [(ngModel)]="data.text" placeholder="add comment"></textarea>
+                <br>
+                <button pButton pRipple label="Add review" class="p-button-outlined w-4" (click)="addReview()"></button>
+            </div>
+            <div class=" col-12 xl:col-10 ">
+                <div class="surface-card shadow-2 border-round p-4 ">
+                    <ul class="list-none p-0 m-0 " *ngFor="let item of list ">
+                        <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4 ">
+                            <div class="flex ">
+                                <div>
+
+                                    <div class="text-600 ">usernmae:{{item.username}}</div>
+                                    <p-avatar image="https://storgeyangzhengx.blob.core.windows.net{{item.filePath}}" styleClass="mr-2" size="xlarge" shape="circle"> </p-avatar>
+
+                                    <div class="text-600 ">comment:{{item.comment}}</div>
+                                    <p-button (click)="translate(item.comment) " styleClass="p-button-link ">translate</p-button>
+                                </div>
+                            </div>
+                            <p-chip label="{{item.judge}}" icon="pi pi-apple" styleClass="mr-2"></p-chip>
+                            <p-button (click)="deleteReview(item.id) " label="Delete " styleClass="p-button-link "></p-button>
+                        </li>
+                        <!--<li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4 ">
+            <div class="flex ">
+              <img src="assets/images/blocks/avatars/circle/avatar-f-2.png " class="mr-3 " style="width: 45px; height: 45px " />
+              <div>
+                <span class="block text-900 font-medium mb-1 ">Theresa Webb Hudson</span>
+                <div class="text-600 ">UI/UX Designer</div>
+              </div>
+            </div>
+          </li>
+          <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4 ">
+            <div class="flex ">
+              <img src="assets/images/blocks/avatars/circle/avatar-f-3.png " class="mr-3 " style="width: 45px; height: 45px " />
+              <div>
+                <span class="block text-900 font-medium mb-1 ">Arlene McCoy</span>
+                <div class="text-600 ">UI/UX Designer</div>
+              </div>
+            </div>
+          </li>
+          <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4 ">
+            <div class="flex ">
+              <img src="assets/images/blocks/avatars/circle/avatar-m-1.png " class="mr-3 " style="width: 45px; height: 45px " />
+              <div>
+                <span class="block text-900 font-medium mb-1 ">Jacob Jones</span>
+                <div class="text-600 ">UI/UX Designer</div>
+              </div>
+            </div>
+          </li>
+          <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4 ">
+            <div class="flex ">
+              <img src="assets/images/blocks/avatars/circle/avatar-m-2.png " class="mr-3 " style="width: 45px; height: 45px " />
+              <div>
+                <span class="block text-900 font-medium mb-1 ">James Cooper</span>
+                <div class="text-600 ">UI/UX Designer</div>
+              </div>
+            </div>
+          </li>-->
+                    </ul>
+                    <p-paginator [rows]="10 " [totalRecords]="100 "></p-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast>
+
+</p-toast>

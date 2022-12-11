@@ -1,0 +1,20 @@
+<body>
+    <p-table [value]="list">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>username</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-list>
+            <tr>
+                <td>{{list.friendname}}</td>
+                <td><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="deletefriends()"></button>
+
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+    <p-toast></p-toast>
+</body>

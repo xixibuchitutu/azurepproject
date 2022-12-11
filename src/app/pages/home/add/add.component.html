@@ -1,0 +1,35 @@
+<div class="grid formgrid p-fluid">
+    <div class="field mb-4 col-12 md:col-8">
+        <label for="userName" class="font-medium text-900">userName</label>
+        <input id="userName" [(ngModel)]="add.userName" type="text" pInputText>
+    </div>
+    <div class="field mb-4 col-12 md:col-8">
+        <label for="fileName" class="font-medium text-900">fileName</label>
+        <input id="fileName" [(ngModel)]="add.fileName" type="text" pInputText>
+    </div>
+    <div class="field mb-4 col-12 md:col-8">
+        <label for="fileName" class="font-medium text-900">detail</label>
+        <input id="fileName" [(ngModel)]="add.detail" type="text" pInputText>
+    </div>
+
+    <div class="card">
+
+        <p-fileUpload name="myfile[]" [customUpload]="true" (uploadHandler)="myUploader($event)">
+            <ng-template pTemplate="toolbar">
+                <div>Upload 3 Files</div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template>
+            <ng-template pTemplate="content" let-files>
+                <div>Additional content.</div>
+            </ng-template>
+        </p-fileUpload>
+
+
+    </div>
+</div>
+<button (click)="addFood()" pButton pRipple label="Add" class="w-auto"></button>
+<p-toast></p-toast>

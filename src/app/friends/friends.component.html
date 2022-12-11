@@ -1,0 +1,21 @@
+<p-table [value]="list">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>username</th>
+            <th>email</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-list>
+        <tr>
+            <td>{{list.username}}</td>
+            <td>{{list.email}}</td>
+            <img style="height:200px;" src="https://storgeyangzhengx.blob.core.windows.net{{list.filePath}}">
+
+            <td><button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="addfriends(list.username)"></button>
+            </td>
+
+        </tr>
+    </ng-template>
+</p-table>
+<p-toast></p-toast>

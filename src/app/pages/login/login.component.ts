@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       this.message.add({ severity: 'danger', summary: 'REGISTER',detail:"error formate email"});
 
     }else{
-      if(this.regForm.username='admin'){
+      if(this.regForm.username=='admin'){
         this.admin='true'
       }else{
         this.admin='false'

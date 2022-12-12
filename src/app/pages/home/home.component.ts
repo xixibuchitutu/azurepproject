@@ -139,10 +139,7 @@ export class HomeComponent implements OnInit {
 
   }
   add(){
-    const ref = this.dialogService.open(AddComponent, {
-      header: "add",
-      width: '30%'
-    });
+     this.router.navigate(['/add']);
   }
 
   showfriend(){

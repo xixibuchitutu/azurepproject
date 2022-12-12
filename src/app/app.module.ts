@@ -41,6 +41,7 @@ import {PasswordModule} from 'primeng/password';
 import {ListboxModule} from 'primeng/listbox';
 import {AvatarGroupModule} from 'primeng/avatargroup';
 import { ChipModule } from 'primeng/chip';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { ChipModule } from 'primeng/chip';
     AvatarGroupModule,
     ChipModule
   ],
-  providers: [MessageService, ConfirmationService, DialogService],
+  providers: [MessageService, ConfirmationService, DialogService,
+             { provide: LocationStrategy, useClass: HashLocationStrategy }  ],
   bootstrap: [AppComponent]
 })
 
